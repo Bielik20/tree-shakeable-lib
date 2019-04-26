@@ -3,4 +3,4 @@
 // ...
 export class DummyClass {}
 
-export * from './ad-engine'
+export * from '@ad-engine'
