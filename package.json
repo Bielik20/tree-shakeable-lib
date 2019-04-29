@@ -21,8 +21,8 @@
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "npm run build:declaration && npm run build:rollup && npm run build:docs",
-    "build:declaration": "tsc -p tsconfig.types.json && tscpaths -p tsconfig.types.json -s ./src -o ./dist/types",
+    "build": "npm run build:rollup && npm run build:declaration && npm run build:docs",
+    "build:declaration": "tscpaths -p tsconfig.json -s ./src -o ./dist/types",
     "build:rollup": "rollup -c rollup.config.ts",
     "build:docs": "typedoc --out docs --target es6 --theme minimal --mode file src",
     "watch": "rollup -c rollup.config.ts -w",
