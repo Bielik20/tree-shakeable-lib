@@ -1,5 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
+import { uglify } from "rollup-plugin-uglify";
 import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
@@ -9,16 +10,10 @@ const pkg = require('./package.json')
 
 const libraryName = 'tree-shakeable-lib'
 
-export default {
+const base = {
   input: `src/index.ts`,
-  output: [
-    { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
-    { file: pkg.module, format: 'es', sourcemap: true },
-  ],
-  // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-  external: Object.keys(pkg.dependencies),
   watch: {
-    include: 'src/**',
+    include: 'src/**'
   },
   plugins: [
     // Allow json resolution
@@ -33,6 +28,22 @@ export default {
     resolve(),
 
     // Resolve source maps to the original source
-    sourceMaps(),
-  ],
+    sourceMaps()
+  ]
 }
+
+export default [
+  {
+    ...base,
+    output: [{ file: pkg.module, format: 'es', sourcemap: true }],
+    // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})]
+  },
+  {
+    ...base,
+    output: [{ file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true }],
+    // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
+    external: [],
+    plugins: [...base.plugins, uglify()]
+  }
+]
