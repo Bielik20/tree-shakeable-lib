@@ -1,4 +1,4 @@
-import { DummyClass, first } from '@ad-engine'
+import { DummyClass, first } from '@ad-engine/core'
 
 export function products() {
   console.log('this is from products')

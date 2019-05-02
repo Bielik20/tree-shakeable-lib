@@ -32,9 +32,9 @@ const corePlugins = [
 
 const typesPlugins = includeTypes
   ? [
-      tscpaths({ out: 'dist/types' }),
-      dtsBundle({ main: 'dist/types/ad-engine/index.d.ts', out: 'modules/core.d.ts' }),
-      dtsBundle({ main: 'dist/types/ad-products/index.d.ts', out: 'modules/products.d.ts' })
+      dtsBundle({ main: 'dist/types/core/index.d.ts', out: 'modules/core.d.ts' }),
+      dtsBundle({ main: 'dist/types/products/index.d.ts', out: 'modules/products.d.ts' }),
+      tscpaths({ out: 'modules' })
     ]
   : []
 
@@ -42,8 +42,8 @@ const targets = {
   es: {
     ...common,
     input: {
-      core: `src/ad-engine/index.ts`,
-      products: `src/ad-products/index.ts`
+      core: `src/core/index.ts`,
+      products: `src/products/index.ts`
     },
     output: { dir: 'modules', format: 'esm', sourcemap: true },
     // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
