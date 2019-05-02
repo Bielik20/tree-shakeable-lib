@@ -1,4 +1,4 @@
-import { DummyClass } from '../src'
+import { DummyClass } from '../src/ad-engine'
 
 /**
  * Dummy test

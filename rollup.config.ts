@@ -5,32 +5,19 @@ import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
-import { resolvePaths } from 'tscpaths'
+import { dtsBundle, tscpaths } from './tools/rollup-plugins'
 
 const pkg = require('./package.json')
-
 const libraryName = 'tree-shakeable-lib'
-
-function tscpaths() {
-  return {
-    onwrite() {
-      resolvePaths({
-        project: 'tsconfig.json',
-        src: './src',
-        out: './dist/types'
-      })
-    }
-  }
-}
+const includeTypes = !process.env.NO_TYPES
 
 const common = {
-  input: `src/index.ts`,
   watch: {
     include: 'src/**'
   }
 }
 
-const commonPlugins = [
+const corePlugins = [
   // Allow json resolution
   json(),
   // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
@@ -43,29 +30,42 @@ const commonPlugins = [
   sourceMaps()
 ]
 
+const typesPlugins = includeTypes
+  ? [
+      tscpaths({ out: 'dist/types' }),
+      dtsBundle({ main: 'dist/types/ad-engine/index.d.ts', out: 'modules/core.d.ts' }),
+      dtsBundle({ main: 'dist/types/ad-products/index.d.ts', out: 'modules/products.d.ts' })
+    ]
+  : []
+
 const targets = {
   es: {
     ...common,
-    output: [{ file: pkg.module, format: 'es', sourcemap: true }],
+    input: {
+      core: `src/ad-engine/index.ts`,
+      products: `src/ad-products/index.ts`
+    },
+    output: { dir: 'modules', format: 'esm', sourcemap: true },
     // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
     external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
     plugins: [
-      ...commonPlugins,
+      ...corePlugins,
       typescript({
         check: false,
         useTsconfigDeclarationDir: true,
-        tsconfigOverride: { compilerOptions: { declaration: true } }
+        tsconfigOverride: { compilerOptions: { declaration: includeTypes } }
       }),
-      tscpaths()
+      ...typesPlugins
     ]
   },
 
   umd: {
     ...common,
-    output: [{ file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true }],
+    input: 'src/bundle.ts',
+    output: { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
     // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
     external: [],
-    plugins: [...commonPlugins, typescript({ check: false }), uglify()]
+    plugins: [...corePlugins, typescript({ check: false }), uglify()]
   }
 }
 

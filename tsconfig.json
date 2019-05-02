@@ -14,7 +14,8 @@
     "typeRoots": ["node_modules/@types"],
     "baseUrl": "src",
     "paths": {
-      "@ad-engine": ["ad-engine/index"]
+      "@ad-engine": ["ad-engine"],
+      "@ad-products": ["ad-products"]
     }
   },
   "include": ["src"]
