@@ -4,6 +4,8 @@
   "description": "",
   "keywords": [],
   "main": "dist/index.umd.js",
+  "module": "dist/index.es5.js",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
@@ -23,8 +25,10 @@
     "build:rollup": "rollup -c rollup.config.ts",
     "build:docs": "typedoc --out docs --target es6 --theme minimal --mode file src",
     "watch": "rollup -c rollup.config.ts -w",
-    "watch:es": "rollup -c rollup.config.ts -w --environment TARGET:es",
-    "watch:es:no-types": "npm run watch:es -- --environment NO_TYPES",
+    "watch:esm": "rollup -c rollup.config.ts -w --environment TARGET:esm",
+    "watch:esm:no-types": "npm run watch:esm -- --environment NO_TYPES",
+    "watch:modules": "rollup -c rollup.config.ts -w --environment TARGET:modules",
+    "watch:modules:no-types": "npm run watch:modules -- --environment NO_TYPES",
     "watch:umd": "rollup -c rollup.config.ts -w --environment TARGET:umd",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",

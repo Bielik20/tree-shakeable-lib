@@ -39,7 +39,7 @@ const typesPlugins = includeTypes
   : []
 
 const targets = {
-  es: {
+  modules: {
     ...common,
     input: {
       core: `src/core/index.ts`,
@@ -59,9 +59,27 @@ const targets = {
     ]
   },
 
+  esm: {
+    ...common,
+    input: 'src/index.ts',
+    output: { file: pkg.module, format: 'esm', sourcemap: true },
+    // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+    plugins: [
+      ...corePlugins,
+      typescript({
+        check: false,
+        useTsconfigDeclarationDir: true,
+        tsconfigOverride: { compilerOptions: { declaration: includeTypes } }
+      }),
+      tscpaths({ out: 'dist/types' })
+    ]
+  },
+
   umd: {
     ...common,
-    input: 'src/bundle.ts',
+    input: 'src/index.ts',
+    context: 'window',
     output: { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
     // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
     external: [],
