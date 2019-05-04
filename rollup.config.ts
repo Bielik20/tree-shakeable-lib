@@ -6,7 +6,7 @@ import postcss from 'rollup-plugin-postcss'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
-import { dtsBundle, tscpaths } from './tools/rollup-plugins'
+import { dtsBundle, tscpaths, classToPure } from './tools/rollup-plugins'
 
 const pkg = require('./package.json')
 const libraryName = 'tree-shakeable-lib'
@@ -42,25 +42,25 @@ const typesPlugins = includeTypes
   : []
 
 const targets = {
-  modules: {
-    ...common,
-    input: {
-      core: `src/core/index.ts`,
-      products: `src/products/index.ts`
-    },
-    output: { dir: 'modules', format: 'esm', sourcemap: true },
-    // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
-    plugins: [
-      ...corePlugins,
-      typescript({
-        check: false,
-        useTsconfigDeclarationDir: true,
-        tsconfigOverride: { compilerOptions: { declaration: includeTypes } }
-      }),
-      ...typesPlugins
-    ]
-  },
+  // modules: {
+  //   ...common,
+  //   input: {
+  //     core: `src/core/index.ts`,
+  //     products: `src/products/index.ts`
+  //   },
+  //   output: { dir: 'modules', format: 'esm', sourcemap: true },
+  //   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
+  //   external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+  //   plugins: [
+  //     ...corePlugins,
+  //     typescript({
+  //       check: false,
+  //       useTsconfigDeclarationDir: true,
+  //       tsconfigOverride: { compilerOptions: { declaration: includeTypes } }
+  //     }),
+  //     ...typesPlugins
+  //   ]
+  // },
 
   esm: {
     ...common,
@@ -75,19 +75,27 @@ const targets = {
         useTsconfigDeclarationDir: true,
         tsconfigOverride: { compilerOptions: { declaration: includeTypes } }
       }),
-      tscpaths({ out: 'dist/types' })
+      tscpaths({ out: 'dist/types' }),
+      classToPure(),
     ]
   },
 
-  umd: {
-    ...common,
-    input: 'src/index.ts',
-    context: 'window',
-    output: { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
-    // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-    external: [],
-    plugins: [...corePlugins, typescript({ check: false }), uglify()]
-  }
+  // umd: {
+  //   ...common,
+  //   input: 'src/index.ts',
+  //   context: 'window',
+  //   output: { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
+  //   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
+  //   external: [],
+  //   plugins: [
+  //     ...corePlugins,
+  //     typescript({
+  //       check: false,
+  //       tsconfigOverride: { compilerOptions: { target: 'es5' } }
+  //     }),
+  //     uglify()
+  //   ]
+  // }
 }
 
 const targetKeys = process.env.TARGET ? [process.env.TARGET] : Object.keys(targets)

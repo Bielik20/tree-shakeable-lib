@@ -1,3 +1,4 @@
 export function first() {
-  console.log('this is from first')
+  const o = { a: '', b: '' }
+  console.log('this is from first', { ...o, c: 'c' })
 }

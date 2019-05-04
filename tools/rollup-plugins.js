@@ -2,13 +2,24 @@ import * as dts from 'dts-bundle'
 import { resolvePaths } from 'tscpaths'
 
 export function dtsBundle(options) {
-  options.name = options.name || 'tmp';
-  options.baseDir = options.baseDir || '.';
-  options.outputAsModuleFolder = options.outputAsModuleFolder || true;
+  options.name = options.name || 'tmp'
+  options.baseDir = options.baseDir || '.'
+  options.outputAsModuleFolder = options.outputAsModuleFolder || true
 
   return {
     generateBundle() {
       dts.bundle(options)
+    }
+  }
+}
+
+export function classToPure() {
+  return {
+    renderChunk(code) {
+      return {
+        code: code.replace(/\/\*\* @class \*\//g, '/*@__PURE__*/'),
+        map: null
+      }
     }
   }
 }
