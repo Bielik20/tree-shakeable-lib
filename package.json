@@ -123,6 +123,7 @@
 		"typescript": "^3.0.3"
 	},
 	"dependencies": {
+		"@babel/runtime-corejs2": "^7.4.4",
 		"rxjs": "^6.5.1"
 	}
 }
