@@ -6,7 +6,7 @@ import sourceMaps from 'rollup-plugin-sourcemaps';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
-const babelConfig = require('./tools/babel-app.config');
+const babelConfig = require('./tools/babel-config');
 import { classToPure, instanceToPure, tscpaths } from './tools/rollup-plugins';
 
 const pkg = require('./package.json');
