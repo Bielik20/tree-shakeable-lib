@@ -1,9 +1,12 @@
+import { DEFAULT_EXTENSIONS } from '@babel/core';
+import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
+const babelConfig = require('./tools/babel-app.config');
 import { classToPure, instanceToPure, tscpaths } from './tools/rollup-plugins';
 
 const pkg = require('./package.json');
@@ -29,6 +32,17 @@ const targets = {
 			// Resolve source maps to the original source
 			postcss({ extract: true }),
 			typescript({ useTsconfigDeclarationDir: true }),
+      babel({
+        babelrc: false,
+        runtimeHelpers: true,
+        include: 'src/**',
+        extensions: [
+          ...DEFAULT_EXTENSIONS,
+          'ts',
+          'tsx'
+        ],
+        ...babelConfig,
+      }),
 			classToPure(),
 			tscpaths({ out: 'dist/types' }),
 		],

@@ -91,6 +91,6 @@
 		"object-literal-sort-keys": false
 	},
 	"linterOptions": {
-		"exclude": ["dist/", "docs/", "lib/", "node_modules/", "jspm_packages/"]
+		"exclude": ["dist/", "docs/", "node_modules/"]
 	}
 }
