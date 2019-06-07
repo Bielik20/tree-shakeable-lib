@@ -7,6 +7,7 @@ module.exports = {
 					browsers: ['last 2 versions', 'safari >= 9.0', 'ie 11', '> 2%'],
 				},
 				modules: false,
+        // useBuiltIns: 'usage',
 			},
 		],
 	],
@@ -15,9 +16,9 @@ module.exports = {
 		[
 			'@babel/plugin-transform-runtime',
 			{
-				helpers: true,
-				corejs: 2,
-				regenerator: true,
+				helpers: false,
+				corejs: 3,
+				regenerator: false,
 			},
 		],
 		'lodash',
