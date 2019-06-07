@@ -1,6 +1,6 @@
-import { Subject } from 'rxjs'
+import { Subject } from 'rxjs';
 
-export function second(name?: string) {
-  console.log('this is from second')
-  return new Subject()
+export function second(name?: string): Subject<void> {
+	console.log('this is from second');
+	return new Subject();
 }

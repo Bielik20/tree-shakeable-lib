@@ -1,9 +1,9 @@
-@import '_mixin';
-@import '_out-of-page';
-@import '_porvata';
-@import '_stickiness';
-@import '_uap';
-@import '_twitch';
+@import 'mixin';
+@import 'out-of-page';
+@import 'porvata';
+@import 'stickiness';
+@import 'uap';
+@import 'twitch';
 
 .stop-scrolling {
 	overflow: hidden;

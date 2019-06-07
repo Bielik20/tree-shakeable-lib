@@ -1,2 +1,4 @@
-export * from './core'
-export * from './products'
+import './styles/styles.scss';
+
+export * from './core';
+export * from './products';

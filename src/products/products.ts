@@ -1,8 +1,8 @@
-import { DummyClass, first } from '@ad-engine/core'
+import { DummyClass, first } from '@lib/core';
 
-export function products() {
-  console.log('this is from products')
-  first()
+export function products(): void {
+	console.log('this is from products');
+	first();
 }
 
 export class ProductsClass extends DummyClass {}

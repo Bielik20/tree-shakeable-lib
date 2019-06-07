@@ -1,5 +1,5 @@
-import { dummy } from '../dummy-class'
+import { dummy } from '../dummy-class';
 
-export function third() {
-  console.log(dummy)
+export function third(): void {
+	console.log(dummy);
 }

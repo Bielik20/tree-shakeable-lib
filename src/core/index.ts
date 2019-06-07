@@ -2,6 +2,6 @@
 // import "core-js/fn/array.find"
 // ...
 
-export * from './engine'
-export * from './dummy-class'
-export * from './utils'
+export * from './engine';
+export * from './dummy-class';
+export * from './utils';

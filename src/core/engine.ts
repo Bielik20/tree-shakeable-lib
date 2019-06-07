@@ -1,5 +1,5 @@
-import { first } from './utils'
+import { first } from './utils';
 
-export function engine() {
-  first()
+export function engine(): void {
+	first();
 }

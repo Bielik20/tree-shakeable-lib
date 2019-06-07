@@ -1,18 +1,20 @@
 class BaseClass {}
 
 export class DummyClass extends BaseClass {
-  static readonly instance: DummyClass = new DummyClass()
+	static readonly instance: DummyClass = new DummyClass();
 
-  get nameGet() {
-    return this.name
-  }
+	name: string;
 
-  public surname = 'bielik surname'
+	get nameGet(): string {
+		return this.name;
+	}
 
-  constructor() {
-    super()
-    this.name = 'bielik'
-  }
+	surname = 'bielik surname';
+
+	constructor() {
+		super();
+		this.name = 'bielik';
+	}
 }
 
-export const dummy = /*@__PURE__*/ new DummyClass()
+export const dummy = new DummyClass();
