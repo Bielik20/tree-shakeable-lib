@@ -80,7 +80,7 @@ function (_super) {
   }
 
   _Object$defineProperty(DummyClass.prototype, "nameGet", {
-    get: function get() {
+    get: function () {
       return this.name;
     },
     enumerable: true,
