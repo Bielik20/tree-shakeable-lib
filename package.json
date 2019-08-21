@@ -124,6 +124,7 @@
 	},
 	"dependencies": {
 		"@babel/runtime-corejs2": "^7.4.4",
-		"rxjs": "^6.5.1"
+		"rxjs": "^6.5.1",
+		"typescript-ioc": "^1.2.5"
 	}
 }

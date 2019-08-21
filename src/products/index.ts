@@ -1,1 +1,1 @@
-export * from './products';
+export * from './consumer-class';
