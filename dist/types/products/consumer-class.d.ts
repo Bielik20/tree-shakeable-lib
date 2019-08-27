@@ -1,6 +1,6 @@
-import { DependencyClass } from '../core';
-export declare class ConsumerClass {
+import { LibDependencyClass } from '../core';
+export declare class LibConsumerClass {
     private dependency;
-    constructor(dependency: DependencyClass);
+    constructor(dependency: LibDependencyClass);
     printName(): void;
 }

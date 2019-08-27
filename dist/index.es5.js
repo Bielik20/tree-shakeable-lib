@@ -1,14 +1,4 @@
-import { Inject } from 'typescript-ioc';
-
-var DependencyClass = /*@__PURE__*/ (function () {
-    function DependencyClass() {
-        this.name = 'bielik name';
-        this.surname = 'bielik surname';
-    }
-    return DependencyClass;
-}());
-
-// Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
+import { Scoped, Scope, Inject } from 'typescript-ioc';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -40,19 +30,35 @@ function __metadata(metadataKey, metadataValue) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
 }
 
-var ConsumerClass = /*@__PURE__*/ (function () {
-    function ConsumerClass(dependency) {
-        this.dependency = dependency;
+var LibDependencyClass = /*@__PURE__*/ (function () {
+    function LibDependencyClass() {
+        this.name = 'bielik name';
+        this.surname = 'bielik surname';
+        console.log('constructor LibDependencyClass');
     }
-    ConsumerClass.prototype.printName = function () {
-        console.log(this.dependency.name + " " + this.dependency.surname);
-    };
-    ConsumerClass = __decorate([
-        __param(0, Inject),
-        __metadata("design:paramtypes", [DependencyClass])
-    ], ConsumerClass);
-    return ConsumerClass;
+    LibDependencyClass = __decorate([
+        Scoped(Scope.Local),
+        __metadata("design:paramtypes", [])
+    ], LibDependencyClass);
+    return LibDependencyClass;
 }());
 
-export { ConsumerClass, DependencyClass };
+// Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
+
+var LibConsumerClass = /*@__PURE__*/ (function () {
+    function LibConsumerClass(dependency) {
+        this.dependency = dependency;
+        console.log('constructor LibConsumerClass');
+    }
+    LibConsumerClass.prototype.printName = function () {
+        console.log(this.dependency.name + " " + this.dependency.surname);
+    };
+    LibConsumerClass = __decorate([
+        __param(0, Inject),
+        __metadata("design:paramtypes", [LibDependencyClass])
+    ], LibConsumerClass);
+    return LibConsumerClass;
+}());
+
+export { LibConsumerClass, LibDependencyClass };
 //# sourceMappingURL=index.es5.js.map

@@ -1,4 +1,5 @@
-export declare class DependencyClass {
+export declare class LibDependencyClass {
     name: string;
     surname: string;
+    constructor();
 }

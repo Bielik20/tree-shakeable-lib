@@ -1,4 +1,4 @@
-import { DependencyClass } from '../src/core';
+import { LibDependencyClass } from '../src/core';
 
 /**
  * Dummy test
@@ -9,6 +9,6 @@ describe('Dummy test', () => {
 	});
 
 	it('DummyClass is instantiable', () => {
-		expect(new DependencyClass()).toBeInstanceOf(DependencyClass);
+		expect(new LibDependencyClass()).toBeInstanceOf(LibDependencyClass);
 	});
 });
