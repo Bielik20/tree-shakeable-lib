@@ -37,7 +37,7 @@ var LibDependencyClass = /*@__PURE__*/ (function () {
         console.log('constructor LibDependencyClass');
     }
     LibDependencyClass = __decorate([
-        Scoped(Scope.Local),
+        Scoped(Scope.Transient),
         __metadata("design:paramtypes", [])
     ], LibDependencyClass);
     return LibDependencyClass;

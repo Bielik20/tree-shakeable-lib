@@ -1,6 +1,6 @@
 import { Scope, Scoped } from 'typescript-ioc';
 
-@Scoped(Scope.Local)
+@Scoped(Scope.Transient)
 export class LibDependencyClass {
 	name = 'bielik name';
 	surname = 'bielik surname';
