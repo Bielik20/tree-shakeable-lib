@@ -1,5 +1,5 @@
-import { Scoped, Scope, Inject } from 'typescript-ioc';
-export { Container, Scope } from 'typescript-ioc';
+import { Scoped, Scope, Inject, Container } from 'typescript-ioc';
+export { Scope } from 'typescript-ioc';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -72,5 +72,7 @@ var LibConsumerClass = /*@__PURE__*/ (function () {
     return LibConsumerClass;
 }());
 
-export { LibConsumerClass, LibDependencyClass, LibUnusedClass };
+var container = /*@__PURE__*/ new Container();
+
+export { LibConsumerClass, LibDependencyClass, LibUnusedClass, container };
 //# sourceMappingURL=index.es5.js.map

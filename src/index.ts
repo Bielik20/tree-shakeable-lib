@@ -2,4 +2,5 @@ import './styles/styles.scss';
 
 export * from './core';
 export * from './products';
-export { Container, Scope } from 'typescript-ioc';
+export * from './ioc-init';
+export { Scope } from 'typescript-ioc';
