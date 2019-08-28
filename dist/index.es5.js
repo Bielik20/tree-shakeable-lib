@@ -1,4 +1,5 @@
 import { Scoped, Scope, Inject } from 'typescript-ioc';
+export { Container, Scope } from 'typescript-ioc';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -43,6 +44,17 @@ var LibDependencyClass = /*@__PURE__*/ (function () {
     return LibDependencyClass;
 }());
 
+var LibUnusedClass = /*@__PURE__*/ (function () {
+    function LibUnusedClass() {
+        console.log('constructor LibUnusedClass');
+    }
+    LibUnusedClass = __decorate([
+        Scoped(Scope.Transient),
+        __metadata("design:paramtypes", [])
+    ], LibUnusedClass);
+    return LibUnusedClass;
+}());
+
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 
 var LibConsumerClass = /*@__PURE__*/ (function () {
@@ -60,5 +72,5 @@ var LibConsumerClass = /*@__PURE__*/ (function () {
     return LibConsumerClass;
 }());
 
-export { LibConsumerClass, LibDependencyClass };
+export { LibConsumerClass, LibDependencyClass, LibUnusedClass };
 //# sourceMappingURL=index.es5.js.map
