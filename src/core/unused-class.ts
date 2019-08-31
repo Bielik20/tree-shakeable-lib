@@ -1,6 +1,6 @@
-import { Scope, Scoped } from 'typescript-ioc';
+import { Injectable } from 'typescript-ioc';
 
-@Scoped(Scope.Transient)
+@Injectable()
 export class LibUnusedClass {
 	constructor() {
 		console.log('constructor LibUnusedClass');

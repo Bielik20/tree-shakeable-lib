@@ -125,6 +125,6 @@
 	"dependencies": {
 		"@babel/runtime-corejs2": "^7.4.4",
 		"rxjs": "^6.5.1",
-		"typescript-ioc": "git+https://github.com/Bielik20/typescript-ioc.git#di-test"
+		"typescript-ioc": "git+https://github.com/Bielik20/typescript-ioc.git"
 	}
 }

@@ -1,4 +1,4 @@
-import { Scoped, Scope, Inject, Container } from 'typescript-ioc';
+import { Injectable, Container } from 'typescript-ioc';
 export { Scope } from 'typescript-ioc';
 
 /*! *****************************************************************************
@@ -23,23 +23,42 @@ function __decorate(decorators, target, key, desc) {
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 }
 
-function __param(paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-}
-
 function __metadata(metadataKey, metadataValue) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
 }
 
+var LibDepOfDep1 = /*@__PURE__*/ (function () {
+    function LibDepOfDep1() {
+        this.field = (Math.random() * 100).toFixed();
+        console.log('constructor LibDepOfDep1', this.field);
+    }
+    LibDepOfDep1 = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [])
+    ], LibDepOfDep1);
+    return LibDepOfDep1;
+}());
+var LibDepOfDep2 = /*@__PURE__*/ (function () {
+    function LibDepOfDep2() {
+        console.log('constructor LibDepOfDep2');
+    }
+    LibDepOfDep2 = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [])
+    ], LibDepOfDep2);
+    return LibDepOfDep2;
+}());
 var LibDependencyClass = /*@__PURE__*/ (function () {
-    function LibDependencyClass() {
+    function LibDependencyClass(dep, dep2) {
+        this.dep = dep;
+        this.dep2 = dep2;
         this.name = 'bielik name';
         this.surname = 'bielik surname';
         console.log('constructor LibDependencyClass');
     }
     LibDependencyClass = __decorate([
-        Scoped(Scope.Transient),
-        __metadata("design:paramtypes", [])
+        Injectable(),
+        __metadata("design:paramtypes", [LibDepOfDep1, LibDepOfDep2])
     ], LibDependencyClass);
     return LibDependencyClass;
 }());
@@ -49,7 +68,7 @@ var LibUnusedClass = /*@__PURE__*/ (function () {
         console.log('constructor LibUnusedClass');
     }
     LibUnusedClass = __decorate([
-        Scoped(Scope.Transient),
+        Injectable(),
         __metadata("design:paramtypes", [])
     ], LibUnusedClass);
     return LibUnusedClass;
@@ -66,7 +85,7 @@ var LibConsumerClass = /*@__PURE__*/ (function () {
         console.log(this.dependency.name + " " + this.dependency.surname);
     };
     LibConsumerClass = __decorate([
-        __param(0, Inject),
+        Injectable(),
         __metadata("design:paramtypes", [LibDependencyClass])
     ], LibConsumerClass);
     return LibConsumerClass;
@@ -74,5 +93,5 @@ var LibConsumerClass = /*@__PURE__*/ (function () {
 
 var container = /*@__PURE__*/ new Container();
 
-export { LibConsumerClass, LibDependencyClass, LibUnusedClass, container };
+export { LibConsumerClass, LibDepOfDep1, LibDepOfDep2, LibDependencyClass, LibUnusedClass, container };
 //# sourceMappingURL=index.es5.js.map

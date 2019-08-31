@@ -1,8 +1,9 @@
 import { LibDependencyClass } from '@lib/core';
-import { Inject } from 'typescript-ioc';
+import { Injectable } from 'typescript-ioc';
 
+@Injectable()
 export class LibConsumerClass {
-	constructor(@Inject private dependency: LibDependencyClass) {
+	constructor(private dependency: LibDependencyClass) {
 		console.log('constructor LibConsumerClass');
 	}
 
