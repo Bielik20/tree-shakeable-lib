@@ -1,3 +1,3 @@
-import { Container } from 'typescript-ioc';
+import { Container } from '@wikia/dependency-injection';
 
 export const container = new Container();

@@ -1,5 +1,4 @@
-import { Injectable, Container } from 'typescript-ioc';
-export { Scope } from 'typescript-ioc';
+import { Injectable, Container } from '@wikia/dependency-injection';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.

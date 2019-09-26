@@ -1,5 +1,5 @@
 import { LibDependencyClass } from '@lib/core';
-import { Injectable } from 'typescript-ioc';
+import { Injectable } from '@wikia/dependency-injection';
 
 @Injectable()
 export class LibConsumerClass {

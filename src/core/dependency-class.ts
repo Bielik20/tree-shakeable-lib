@@ -1,4 +1,4 @@
-import { Injectable } from 'typescript-ioc';
+import { Injectable } from '@wikia/dependency-injection';
 
 @Injectable()
 export class LibDepOfDep1 {
