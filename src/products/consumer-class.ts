@@ -3,7 +3,7 @@ import { Injectable } from '@wikia/dependency-injection';
 
 @Injectable()
 export class LibConsumerClass {
-	constructor(private dependency: LibDependencyClass) {
+	constructor(public dependency: LibDependencyClass) {
 		console.log('constructor LibConsumerClass');
 	}
 

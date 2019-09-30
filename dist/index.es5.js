@@ -1,4 +1,4 @@
-import { Injectable, Container } from '@wikia/dependency-injection';
+import { Injectable } from '@wikia/dependency-injection';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -90,7 +90,5 @@ var LibConsumerClass = /*@__PURE__*/ (function () {
     return LibConsumerClass;
 }());
 
-var container = /*@__PURE__*/ new Container();
-
-export { LibConsumerClass, LibDepOfDep1, LibDepOfDep2, LibDependencyClass, LibUnusedClass, container };
+export { LibConsumerClass, LibDepOfDep1, LibDepOfDep2, LibDependencyClass, LibUnusedClass };
 //# sourceMappingURL=index.es5.js.map

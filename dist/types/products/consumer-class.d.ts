@@ -1,6 +1,6 @@
 import { LibDependencyClass } from '../core';
 export declare class LibConsumerClass {
-    private dependency;
+    dependency: LibDependencyClass;
     constructor(dependency: LibDependencyClass);
     printName(): void;
 }

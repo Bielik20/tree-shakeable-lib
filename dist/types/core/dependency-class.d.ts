@@ -1,5 +1,5 @@
 export declare class LibDepOfDep1 {
-    private field;
+    field: string;
     constructor();
 }
 export declare class LibDepOfDep2 {

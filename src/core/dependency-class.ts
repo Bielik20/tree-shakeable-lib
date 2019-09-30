@@ -2,7 +2,7 @@ import { Injectable } from '@wikia/dependency-injection';
 
 @Injectable()
 export class LibDepOfDep1 {
-	private field: string;
+	field: string;
 
 	constructor() {
 		this.field = (Math.random() * 100).toFixed();
